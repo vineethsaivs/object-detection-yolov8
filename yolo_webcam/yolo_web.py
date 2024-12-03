@@ -16,7 +16,7 @@ classNames = ["person", "bicycle", "car", "motorbike", "aeroplane", "bus", "trai
               "bottle","wine glass","cup","fork","knife","spoon","bowl", "banana","apple","sandwich","orange","broccoli","carrot",
               "hot dog", "pizza","donut", "calke", "chair", "sofa", "pottedplant","bed","diningtable","toilet","tvmonitor","laptop","mouse","remote",
               "keyboard", "cell phone","microwave", "oven", "toaster", "sink", "refrigator", "book", "clock", "vase","scissors", "teddy bear", "hair drier", "tootbrush"
-              ]  # Ensure this matches your model's classes
+              ]
 
 while True:
     success, img = cap.read()
@@ -27,7 +27,7 @@ while True:
     for r in results:
         boxes = r.boxes
         for box in boxes:
-            if box.xyxy.size(0) == 0:  # Skip if no bounding boxes are detected
+            if box.xyxy.size(0) == 0:
                 continue
             # Bounding box
             x1, y1, x2, y2 = box.xyxy[0]
@@ -40,9 +40,9 @@ while True:
             cvzone.putTextRect(img, f'{conf}', (max(0, x1), max(35, y1)))
 
             # Class name
-            if box.cls.size(0) > 0:  # Ensure there is a class index
+            if box.cls.size(0) > 0:
                 cls = int(box.cls[0])
-                if cls < len(classNames):  # Ensure class index is within bounds
+                if cls < len(classNames):
                     cvzone.putTextRect(img, f"{classNames[cls]} {conf}", (max(0, x1), max(35, y1)),thickness=1)
 
     cv2.imshow('Image', img)
